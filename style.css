@@ -10,16 +10,50 @@ body {
     width: 60vmin;
     height: 90vmin;
     margin: auto;
+}
+
+.flex-col {
     display: flex;
     flex-direction: column;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
 }
 
 .screen {
     flex: 1;
     border: 1px dotted lightblue;
 }
-
 .buttons {
     flex: 5;
     border: 1px dotted lightyellow;
+}
+
+.left {
+    flex: 3;
+    border: 1px dotted lightgreen;
+}
+.right {
+    flex: 1;
+    border: 1px dotted lightcoral;
+}
+
+.top {
+    flex: 4;
+    border: 1px dotted red;
+    flex-wrap: wrap;
+}
+.bot {
+    flex: 1;
+    border: 1px dotted green;
+}
+
+.top>div {
+    flex: 1;
+}
+
+button {
+    flex: 1;
 }
