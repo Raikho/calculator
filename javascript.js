@@ -47,6 +47,9 @@ const buffer = {
         } else {
             item.value += value;
         }
+    },
+    addOperator(value) {
+        this.items.push({type: 'operator', value: value});
     }
 }
 
@@ -70,7 +73,14 @@ function update() {
             if (buffer.getType() === 'operand') {
                 buffer.appendOperand(value);
             }
+            else if (buffer.getType() == 'operator') {
+                buffer.addOperand(value);
+            }
             break;
+        case 'op':
+            if (buffer.getType() === 'operand') {
+                buffer.addOperator(value);
+            }
     }
     //console.log(buffer.items);
     updateScreen();
