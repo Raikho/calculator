@@ -26,3 +26,21 @@ function updateScreen() {
     screen.innerText = (fullScreenText.length==0) ? '0'
             : fullScreenText.slice(-MAX_CHAR);    
 }
+
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => {
+    button.addEventListener('click', update);
+});
+
+function update() {
+    let value = this.innerText;
+    switch (value) {
+        case 'clr':
+            break;
+        case '=':
+            break;
+        default:
+            fullScreenText += value;
+            updateScreen();
+    }
+}
