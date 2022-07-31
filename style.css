@@ -49,11 +49,15 @@ body {
     flex: 1;
     border: 1px dotted green;
 }
-
 .top>div {
     flex: 1;
 }
 
 button {
     flex: 1;
+}
+button#add,
+button#eql,
+button#zero {
+    flex: 2;
 }
