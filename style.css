@@ -6,20 +6,24 @@ body {
 }
 
 .container {
-    border: 1px dotted red;
     width: 60vmin;
     height: 90vmin;
     margin: auto;
+    padding: 5px;
+    border-radius: 2px;
+    background-color: slategray;
 }
 
 .flex-col {
     display: flex;
     flex-direction: column;
+    gap: 2px;
 }
 
 .flex-row {
     display: flex;
     flex-direction: row;
+    gap: 2px;
 }
 
 .screen {
@@ -28,36 +32,32 @@ body {
 }
 .buttons {
     flex: 5;
-    border: 1px dotted lightyellow;
 }
 
 .left {
     flex: 3;
-    border: 1px dotted lightgreen;
 }
 .right {
     flex: 1;
-    border: 1px dotted lightcoral;
 }
 
 .top {
     flex: 4;
-    border: 1px dotted red;
     flex-wrap: wrap;
 }
 .bot {
     flex: 1;
-    border: 1px dotted green;
 }
 .top>div {
     flex: 1;
 }
 
-button {
-    flex: 1;
-}
 button#add,
 button#eql,
 button#zero {
     flex: 2;
+}
+button {
+    flex: 1;
+    font-size: 28px;
 }
