@@ -7,7 +7,19 @@ body {
 
 .container {
     border: 1px dotted red;
-    width: 80vmin;
-    height: 80vmin;
+    width: 60vmin;
+    height: 90vmin;
     margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.screen {
+    flex: 1;
+    border: 1px dotted lightblue;
+}
+
+.buttons {
+    flex: 5;
+    border: 1px dotted lightyellow;
 }
