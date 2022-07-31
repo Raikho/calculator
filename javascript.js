@@ -16,3 +16,13 @@ function operate(op, a, b) {
     }
 }
 
+
+const screen = document.querySelector('.screen');
+const MAX_CHAR = 16;
+let fullScreenText = '';
+updateScreen();
+
+function updateScreen() {
+    screen.innerText = (fullScreenText.length==0) ? '0'
+            : fullScreenText.slice(-MAX_CHAR);    
+}
