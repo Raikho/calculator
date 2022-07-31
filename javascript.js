@@ -27,19 +27,26 @@ function updateScreen() {
 }
 
 const buffer = {
-    items: [],
+    items: [{type: 'operand', value: '0'}],
     getType() {
-        let length = this.items.length;
-        if (length == 0)
-            return 'empty';
-        else
-            return this.items[length-1].type;
+        return this.items[this.items.length-1].type;
     },
     addOperand(value) {
-        this.items.push({type: 'operand', value: value});
+        this.items.push({type: 'operand', value: '0'});
+        this.appendOperand(value);
     },
     appendOperand(value) {
-        this.items[this.items.length-1].value += value;
+        const item = this.items[this.items.length-1];
+        if (value === '.') {
+            if (item.value.includes('.'))
+                return;
+            else
+                item.value += value;
+        } else if (item.value === '0') {
+            item.value = value;
+        } else {
+            item.value += value;
+        }
     }
 }
 
@@ -60,12 +67,11 @@ function update() {
 
     switch (type) {
         case 'num':
-            if (buffer.getType() == 'empty')
-                buffer.addOperand(value);
-            else if (buffer.getType()=== 'operand')
+            if (buffer.getType() === 'operand') {
                 buffer.appendOperand(value);
+            }
             break;
     }
-    console.log(buffer.items);
+    //console.log(buffer.items);
     updateScreen();
 }
