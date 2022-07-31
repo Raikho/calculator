@@ -67,3 +67,11 @@ button {
     flex: 1;
     font-size: 28px;
 }
+
+button[data-type='clr'],
+button[data-type='eql'] {
+    color: green;
+}
+button[data-type='op'] {
+    color: blue;
+}

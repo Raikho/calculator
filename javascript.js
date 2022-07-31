@@ -34,6 +34,7 @@ buttons.forEach((button) => {
 
 function update() {
     let value = this.innerText;
+    let type = this.dataset.type;
     switch (value) {
         case 'clr':
             break;
