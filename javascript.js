@@ -11,7 +11,7 @@ function evaluate() {
         let a = Number(buffer.items[0].value);
         let b = Number(buffer.items[2].value);
         let ans = operate(op, a, b);
-        buffer.items.splice(0, 3, {type: 'operand', value: ans});
+        buffer.items.splice(0, 3, {type: 'answer', value: ans});
     }
 }
 
@@ -22,6 +22,17 @@ function updateScreen() {
     });
     screen.innerText = (text.length==0) ? '0'
             : text.slice(-MAX_CHAR);    
+}
+
+function debug() {
+    console.clear();
+    const items = buffer.items;
+    let length = buffer.items.length;
+    for (let i = 0; i < length; i++) {
+        let type = items[i].type;
+        let value = items[i].value;
+        console.log(`#${i}: ${type} ${value}`);
+    }
 }
 
 const buffer = {
@@ -48,6 +59,15 @@ const buffer = {
     },
     addOperator(value) {
         this.items.push({type: 'operator', value: value});
+    },
+    convertToOperand() {
+        const item = this.items[this.items.length-1];
+        item.type = 'operand';
+    },
+    resetOperand() {
+        const item = this.items[this.items.length-1];
+        item.type = 'operand';
+        item.value = '0';
     }
 }
 
@@ -75,9 +95,16 @@ function update() {
             else if (bufferType == 'operator') {
                 buffer.addOperand(value);
             }
+            if (bufferType === 'answer') {
+                buffer.resetOperand();
+                buffer.appendOperand(value);
+            }
             break;
         case 'op':
             if (bufferType === 'operand') {
+                buffer.addOperator(value);
+            } else if (bufferType === 'answer') {
+                buffer.convertToOperand();
                 buffer.addOperator(value);
             }
             break;
@@ -87,4 +114,5 @@ function update() {
     }
     //console.log(buffer.items);
     updateScreen();
+    debug();
 }
