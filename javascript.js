@@ -14,6 +14,7 @@ function evaluate() {
         let a = Number(items[i-1].value);
         let b = Number(items[i+1].value);
         let ans = operate(op, a, b);
+        ans = +ans.toFixed(10);
 
         if (isError(ans)) {
             buffer.error();
