@@ -6,13 +6,38 @@ function operate(op, a, b) {
 }
 
 function evaluate() {
-    while (buffer.items.length > 1) {
-        let op = buffer.items[1].value;
-        let a = Number(buffer.items[0].value);
-        let b = Number(buffer.items[2].value);
+    const items = buffer.items;
+    while (items.length > 1) {
+        let i = getNextSet(items);
+
+        let op = items[i].value;
+        let a = Number(items[i-1].value);
+        let b = Number(items[i+1].value);
         let ans = operate(op, a, b);
-        buffer.items.splice(0, 3, {type: 'answer', value: ans});
+        buffer.items.splice(i-1, 3, {type: 'answer', value: ans});
     }
+}
+
+function getNextSet(array) {
+    let firstIndex = 0;
+    let bestPriority = 0;
+    for (let i = 0; i < array.length; i++) {
+        if (array[i].type === 'operator') {
+            let priority = getOperatorPriority(array[i].value);
+            if (priority > bestPriority) {
+                firstIndex = i;
+                bestPriority = priority;
+            }
+        }
+    }
+    return firstIndex;
+}
+
+function getOperatorPriority(op) {
+    if (op === '+' || op === '-')
+        return 1;
+    if (op === '*' || op === '/')
+        return 2;
 }
 
 function updateScreen() {
