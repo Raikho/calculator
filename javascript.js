@@ -14,13 +14,22 @@ function evaluate() {
         let a = Number(items[i-1].value);
         let b = Number(items[i+1].value);
         let ans = operate(op, a, b);
-        buffer.items.splice(i-1, 3, 
-            {type: 'answer', value: ans.toString()});
+
+        if (isError(ans)) {
+            buffer.error();
+            break;
+        }
+
+        buffer.collapseOperator(i, ans.toString())
     }
-    let value = items[0].value;
-    if (value === 'Infinity' || value === '-Infinity') {
-        buffer.items[0] = {type: 'error', value: 'ERROR'};
-    }
+}
+
+function isError(num) {
+    console.log("num to check: " + num);
+    if (num == Infinity) return true;
+    if (num === -Infinity) return true;
+    if (Number.isNaN(num)) return true;
+    return false;
 }
 
 function getNextSet(array) {
@@ -55,7 +64,6 @@ function updateScreen() {
 }
 
 function debug() {
-    console.clear();
     const items = buffer.items;
     let length = buffer.items.length;
     for (let i = 0; i < length; i++) {
@@ -101,6 +109,12 @@ const buffer = {
     },
     clear() {
         this.items = [{type: 'operand', value: '0'}];
+    },
+    collapseOperator(index, ans) {
+        this.items.splice(index-1, 3, {type: 'answer', value: ans})
+    },
+    error() {
+        this.items = [{type: 'error', value: 'ERROR'}];
     }
 }
 
