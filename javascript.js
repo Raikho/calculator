@@ -14,7 +14,12 @@ function evaluate() {
         let a = Number(items[i-1].value);
         let b = Number(items[i+1].value);
         let ans = operate(op, a, b);
-        buffer.items.splice(i-1, 3, {type: 'answer', value: ans});
+        buffer.items.splice(i-1, 3, 
+            {type: 'answer', value: ans.toString()});
+    }
+    let value = items[0].value;
+    if (value === 'Infinity' || value === '-Infinity') {
+        buffer.items[0] = {type: 'error', value: 'ERROR'};
     }
 }
 
