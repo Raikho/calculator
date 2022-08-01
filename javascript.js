@@ -65,18 +65,19 @@ buttons.forEach((button) => {
 function update() {
     let value = this.innerText;
     let type = this.dataset.type;
+    let bufferType = buffer.getType();
 
     switch (type) {
         case 'num':
-            if (buffer.getType() === 'operand') {
+            if (bufferType === 'operand') {
                 buffer.appendOperand(value);
             }
-            else if (buffer.getType() == 'operator') {
+            else if (bufferType == 'operator') {
                 buffer.addOperand(value);
             }
             break;
         case 'op':
-            if (buffer.getType() === 'operand') {
+            if (bufferType === 'operand') {
                 buffer.addOperator(value);
             }
             break;
