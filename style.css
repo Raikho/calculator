@@ -74,3 +74,6 @@ button[data-type='eql'] {
 button[data-type='op'] {
     color: blue;
 }
+button[data-type='num'] {
+    font-weight: 700;
+}

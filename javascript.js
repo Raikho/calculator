@@ -115,6 +115,21 @@ const buffer = {
     },
     error() {
         this.items = [{type: 'error', value: 'ERROR'}];
+    },
+    canNegateSign() {
+        let n = Number(this.items[this.items.length-1].value)
+        console.log("n: " + n + ", !=0: " + (n == 0));
+        return (n == 0);
+    },
+    negateSign() {
+        let value = this.items[this.items.length-1].value;
+        let newValue;
+        if (value.includes('-')) {
+            newValue = value.substring(1);
+        } else {
+            newValue = '-'.concat(value);
+        }
+        this.items[this.items.length-1].value = newValue;
     }
 }
 
@@ -149,6 +164,10 @@ function update() {
             break;
         case 'op':
             if (bufferType === 'operand') {
+                if (value === '-' && buffer.canNegateSign()) {
+                    buffer.negateSign();
+                    break;
+                }
                 buffer.addOperator(value);
             } else if (bufferType === 'answer') {
                 buffer.convertToOperand();
