@@ -28,7 +28,6 @@ body {
 
 .screen {
     flex: 0.5;
-    border: 1px dotted lightblue;
     font-family: 'Lucida Grande', courier, monospace;
     font-weight: 400;
     font-size: 28px;

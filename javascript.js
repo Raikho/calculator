@@ -1,21 +1,19 @@
-function add(a, b) {return a + b;}
-function subtract(a, b) {return a - b;}
-function multiply(a, b) {return a * b;}
-function divide(a, b) {return a / b;}
-
 function operate(op, a, b) {
-    switch (op) {
-        case 'add':
-            return add(a, b);
-        case 'sub':
-            return subtract(a, b);
-        case 'mul':
-            return multiply(a, b);
-        case 'div':
-            return divide(a, b); 
-    }
+    if (op === '+') return a + b;
+    if (op === '-') return a - b;
+    if (op === '*') return a * b;
+    if (op === '/') return a / b;
 }
 
+function evaluate() {
+    while (buffer.items.length > 1) {
+        let op = buffer.items[1].value;
+        let a = Number(buffer.items[0].value);
+        let b = Number(buffer.items[2].value);
+        let ans = operate(op, a, b);
+        buffer.items.splice(0, 3, {type: 'operand', value: ans});
+    }
+}
 
 function updateScreen() {
     let text = '';
@@ -81,6 +79,10 @@ function update() {
             if (buffer.getType() === 'operand') {
                 buffer.addOperator(value);
             }
+            break;
+        case 'eql':
+            evaluate();
+            break;
     }
     //console.log(buffer.items);
     updateScreen();
