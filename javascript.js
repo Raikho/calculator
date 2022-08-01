@@ -68,6 +68,9 @@ const buffer = {
         const item = this.items[this.items.length-1];
         item.type = 'operand';
         item.value = '0';
+    },
+    clear() {
+        this.items = [{type: 'operand', value: '0'}];
     }
 }
 
@@ -110,6 +113,9 @@ function update() {
             break;
         case 'eql':
             evaluate();
+            break;
+        case 'clr':
+            buffer.clear();
             break;
     }
     //console.log(buffer.items);
