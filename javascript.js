@@ -172,6 +172,8 @@ function update() {
             } else if (bufferType === 'answer') {
                 buffer.convertToOperand();
                 buffer.addOperator(value);
+            } else if (bufferType === 'operator' && value === '-') {
+                buffer.addOperand(value);
             }
             break;
         case 'eql':
